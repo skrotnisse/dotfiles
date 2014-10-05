@@ -1,0 +1,37 @@
+[push]
+default = tracking
+
+[user]
+name = Robert Ödman
+email = robert.odman@gmail.com
+
+[color]
+ui = true
+
+[alias]
+gr = log --graph --full-history --all --color --decorate
+unstage = reset HEAD --
+
+[merge]
+tool = vimdiff
+stat = true
+
+[core]
+excludesfile = ${HOME}/.gitignore_global
+precomposeunicode = true
+editor = emacs
+whitespace = trailing-space,space-before-tab
+
+[branch]
+autosetuprebase = always
+autosetupmerge = true
+
+[filter "media"]
+clean = git-media-clean %f
+smudge = git-media-smudge %f
+
+[diff]
+mnemonicprefix = true
+
+[rerere]
+enabled = true
