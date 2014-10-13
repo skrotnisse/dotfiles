@@ -1,0 +1,23 @@
+! rxvt-unicode configuration
+! --------------------------
+URxvt*.depth:       32
+URxvt*.font:        8x13
+URxvt*.cursorBlink: true
+URxvt*.saveLines:   4000
+
+URxvt*.background:  [60]#000000
+URxvt*.foreground:  #FFFFFF
+URxvt*.transparent: true
+URxvt*.shading:     40
+
+URxvt*.jumpScroll:  false
+URxvt*.skipScroll:  false
+
+URxvt*.scrollstyle: plain
+
+! URxvt*.reverseVideo:      true
+! URxvt*.scrollBar:         false
+! URxvt*.scrollWithBuffer:  true
+! URxvt*.scrollTtyKeypress: true
+! URxvt*.secondaryWheel:    1
+! URxvt*.letterSpace:       -1
