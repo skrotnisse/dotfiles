@@ -85,4 +85,6 @@ alias l="ls -lrt"
 alias ll="ls -lart"
 alias lf="ls -lartF"
 
+alias pcat='pygmentize -g -O style=colorful,linenos=1'
+
 alias pacman="pacman --color always"

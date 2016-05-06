@@ -20,8 +20,13 @@
   (local-set-key (kdb "RET") 'newline-and-indent))
 (add-hook 'c-mode 'set-new-line-and-indent)
 
-; Change indent-level when writing C code to 3
-(setq-default c-basic-offset 3)
+; Setup indent levels
+(setq-default tab-width 2)
+(setq js-indent-level 2)
+(setq c-basic-offset 4)
+(setq css-indent-offset 2)
+(setq sh-basic-offset 2)
+(setq-default indent-tabs-mode nil)
 
 ; Default encoding of buffers
 (setq-default buffer-file-coding-system 'utf-8-unix)

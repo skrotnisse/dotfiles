@@ -28,6 +28,10 @@ install_emacs() {
     install_package emacs-goodies-el
 }
 
+install_pygmetize() {
+    install_package python-pygments
+}
+
 clear_existing_configuration() {
     rm -f ~/.gitconfig
     rm -f ~/.gitignore_global
@@ -64,6 +68,7 @@ case $1 in
 
 	install_emacs
 	install_oh-my-zsh
+	install_pygmetize
 
 	clear_existing_configuration
 	update_symlinks refresh
