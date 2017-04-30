@@ -20,7 +20,7 @@ ensure_command() {
 }
 
 install_oh-my-zsh() {
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 }
 
 install_emacs() {

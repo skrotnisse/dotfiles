@@ -7,7 +7,7 @@ Inspired by: <a href="https://github.com/klippx/dotfiles">klippx</a>, <a href="h
 Install required packages and perform symlink synchronization:
 <pre><code>git clone https://github.com/skrotnisse/dotfiles
 cd dotfiles
-sudo ./dotfiles.sh install</code></pre>
+./dotfiles.sh install</code></pre>
 
 Switch to zsh:
 <pre><code>chsh -s /bin/zsh</code></pre>
