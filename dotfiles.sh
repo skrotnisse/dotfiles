@@ -4,7 +4,7 @@ install_package() {
     if hash pacman 2>/dev/null; then
 	sudo pacman -S $1
     elif hash apt-get 2>/dev/null; then
-	sudo apt-get install $1
+	sudo apt-get --yes install $1
     elif hash brew 2>/dev/null; then
 	brew install $1
     fi
@@ -20,7 +20,7 @@ ensure_command() {
 }
 
 install_oh-my-zsh() {
-    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 }
 
 install_emacs() {
