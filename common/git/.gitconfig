@@ -3,7 +3,7 @@ default = tracking
 
 [user]
 name = Robert Ödman
-email = robert.odman@gmail.com
+email = robert.odman.development@gmail.com
 
 [color]
 ui = true
