@@ -51,6 +51,9 @@ case $1 in
         echo -e "---- Installing stow.."
         echo -e "--------------------------------------------------------------------"
         install_package stow
+        echo -e "---- Installing net-tools.."
+        echo -e "--------------------------------------------------------------------"
+        install_package net-tools
         echo -e "---- Installing python-pygments.."
         echo -e "--------------------------------------------------------------------"
         install_package python-pygments
