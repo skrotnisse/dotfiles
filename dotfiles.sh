@@ -2,9 +2,9 @@
 
 install_package() {
     if hash pacman 2>/dev/null; then
-	sudo pacman -S $1
+	sudo pacman -S -q $1
     elif hash apt-get 2>/dev/null; then
-	sudo apt-get --yes install $1
+	sudo apt-get --yes -qq install $1
     elif hash brew 2>/dev/null; then
 	brew install $1
     fi
@@ -18,6 +18,8 @@ backup_configuration() {
     mv ~/.gdbinit ~/.dotfiles_backup 2>/dev/null
     mv ~/.emacs ~/.dotfiles_backup 2>/dev/null
     mv ~/.irssi ~/.dotfiles_backup 2>/dev/null
+    mv ~/.xinitrc ~/.dotfiles_backup 2>/dev/null
+    mv ~/.Xresources ~/.dotfiles_backup 2>/dev/null
     mv ~/.i3 ~/.dotfiles_backup 2>/dev/null
 }
 
@@ -28,40 +30,53 @@ update_symlinks() {
     eval "(cd common && stow $STOW_ARGS gdb)"
     eval "(cd common && stow $STOW_ARGS emacs)"
     eval "(cd common && stow $STOW_ARGS irssi)"
+    eval "(cd common && stow $STOW_ARGS xorg)"
     eval "(cd common && stow $STOW_ARGS i3)"
 }
 
 
 case $1 in
-    
-    "install") 
+
+    "install")
+        echo -e "--------------------------------------------------------------------"
+        echo -e "---- Dotfiles script: INSTALLING ..                              ---"
+        echo -e "--------------------------------------------------------------------"
 	# git (should already be installed)
         install_package git
 
-	# various dependencies
+	# various applications and dependencies
+        echo -e "Installing curl.."
         install_package curl
+        echo -e "Installing stow.."
         install_package stow
+        echo -e "Installing python-pygments.."
+        install_package python-pygments
 
 	# zsh
+        echo -e "Installing zsh.."
         install_package zsh
+        echo -e "Installing oh-my-zsh.."
         curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
 	# emacs
+        echo -e "Installing emacs.."
         install_package emacs-nox
         install_package emacs-goodies-el
         install_package elpa-magit
 
-	# python pygments
-        install_package python-pygments
-
 	# irssi
+        echo -e "Installing irssi.."
 	install_package irssi
         install_package irssi-plugin-xmpp
 
         # i3
+        echo -e "Installing i3.."
         install_package i3
+        install_package feh
+	mkdir -p ~/wallpapers
 
         # setup symlinks
+        echo -e "Setting up symlinks to dotfiles.."
 	backup_configuration
 	update_symlinks "-R"
 
@@ -69,8 +84,12 @@ case $1 in
         echo -e "Switching to zsh .. "
         sudo chsh -s /bin/zsh
 
-        echo -e "Dotfiles script is DONE!"
-        echo -e "Note: X needs to be restarted for all changes to be activated."
+        echo -e "--------------------------------------------------------------------"
+        echo -e "---- Dotfiles script: COMPLETED                                  ---"
+        echo -e "--------------------------------------------------------------------"
+        echo -e "---- NOTE:                                                       ---"
+        echo -e "----    X needs to be restarted for all changes to be activated. ---"
+        echo -e "--------------------------------------------------------------------"
 
 	;;
 

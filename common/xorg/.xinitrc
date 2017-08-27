@@ -18,4 +18,4 @@ xrdb -merge ~/.Xresources
 exec feh --recursive --randomize --bg-center ~/wallpapers/* &
 
 # Start the i3 window manager.
-exec i3 -c ~/.i3config -V >> ~/.i3logs/log-$(date +%Y-%m-%d.%H:%M) 2>&1
+exec i3 -c ~/.i3/config -V >> ~/.i3logs/log-$(date +%Y-%m-%d.%H:%M) 2>&1
