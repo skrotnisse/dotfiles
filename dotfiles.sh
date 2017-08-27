@@ -10,83 +10,80 @@ install_package() {
     fi
 }
 
-ensure_command() {
-    if hash $1 2>/dev/null; then
-	echo -e "-- Command '$1' found."
-    else
-	echo -e "-- Command '$1' not found, installing.."
-	install_package $1
-    fi
-}
-
-install_oh-my-zsh() {
-    curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-}
-
-install_emacs() {
-    install_package emacs23-nox
-    install_package emacs-goodies-el
-}
-
-install_pygmetize() {
-    install_package python-pygments
-}
-
-clear_existing_configuration() {
-    rm -f ~/.gitconfig
-    rm -f ~/.gitignore_global
-    rm -f ~/.zshrc
-    rm -f ~/.gdbinit
-    rm -f ~/.emacs
+backup_configuration() {
+    mkdir -p ~/.dotfiles_backup
+    mv ~/.gitconfig ~/.dotfiles_backup 2>/dev/null
+    mv ~/.gitconfig_global ~/.dotfiles_backup 2>/dev/null
+    mv ~/.zshrc ~/.dotfiles_backup 2>/dev/null
+    mv ~/.gdbinit ~/.dotfiles_backup 2>/dev/null
+    mv ~/.emacs ~/.dotfiles_backup 2>/dev/null
+    mv ~/.irssi ~/.dotfiles_backup 2>/dev/null
+    mv ~/.i3 ~/.dotfiles_backup 2>/dev/null
 }
 
 update_symlinks() {
-    STOW_ARGS="-vt ~"
-    case $1 in
-	"refresh") STOW_ARGS="-R $STOW_ARGS" ;;
-	"delete")  STOW_ARGS="-D $STOW_ARGS" ;;
-	*) ;;
-    esac
-
-#    eval "(cd .      && stow $STOW_ARGS linux_debian)"
-#    eval "(cd .      && stow $STOW_ARGS linux_arch)"
+    STOW_ARGS="$1 -vt ~"
     eval "(cd common && stow $STOW_ARGS git)"
     eval "(cd common && stow $STOW_ARGS zsh)"
     eval "(cd common && stow $STOW_ARGS gdb)"
     eval "(cd common && stow $STOW_ARGS emacs)"
-#    eval "(cd .      && stow $STOW_ARGS private)"
+    eval "(cd common && stow $STOW_ARGS irssi)"
+    eval "(cd common && stow $STOW_ARGS i3)"
 }
 
 
 case $1 in
     
     "install") 
-	ensure_command stow
-	ensure_command git
-	ensure_command zsh
-	ensure_command curl
+	# stow
+        install_package stow
 
-	install_emacs
-	install_oh-my-zsh
-	install_pygmetize
+	# git
+        install_package git
 
-	clear_existing_configuration
-	update_symlinks refresh
+	# zsh
+        install_package zsh
+        curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+	# curl
+        install_package curl
+
+	# emacs
+        install_package emacs23-nox
+        install_package emacs-goodies
+
+	# python pygments
+        install_package python-pygments
+
+	# irssi
+	install_package irssi
+        install_package irssi-plugin-xmpp
+
+        # i3
+        install_package i3
+
+        # setup symlinks
+	backup_configuration
+	update_symlinks "-R"
+
+        # switch to zsh
+        chsh -s /bin/zsh
+
 	;;
-    
+
     "refresh")
-	update_symlinks refresh
+	update_symlinks "-R"
 	;;
-    
+
     "delete")
-	update_symlinks delete
+	update_symlinks "-D"
 	;;
-    
+
     *)
 	echo -e "Usage: dotfiles.sh <command>\n"
 	echo -e "The commands are:"
-	echo -e "\tinstall \tInstalls applications and creates all dotfile symlinks."
-	echo -e "\trefresh \tSynchronizes dotfiles to symlinks."
+	echo -e "\tinstall \tInstalls applications and creates symlinks for all dotfiles."
+	echo -e "\trefresh \tRefreshes all symlinks."
 	echo -e "\tdelete  \tDeletes all symlinks."
 	;;
 

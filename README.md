@@ -1,5 +1,5 @@
 <h3>Dotfiles</h3>
-Dotfiles for my linux configuration with an installation shell-script. The script uses stow to maintain symbolic links.
+Dotfiles for my linux configuration. The dotfiles shellscript will store a backup of any existing dotfiles, and the replace them by symbolic links.
 
 Inspired by: <a href="https://github.com/klippx/dotfiles">klippx</a>, <a href="https://github.com/fsrc/stowedots">fsrc</a> and <a href="https://www.youtube.com/watch?v=zhdO46oqeRw">gotbletu</a>
 
