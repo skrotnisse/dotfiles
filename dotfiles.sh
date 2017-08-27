@@ -35,11 +35,11 @@ update_symlinks() {
 case $1 in
     
     "install") 
+	# git (should already be installed)
+        install_package git
+
 	# stow
         install_package stow
-
-	# git
-        install_package git
 
 	# zsh
         install_package zsh
@@ -67,7 +67,11 @@ case $1 in
 	update_symlinks "-R"
 
         # switch to zsh
-        chsh -s /bin/zsh
+        echo -e "Switching to zsh .. "
+        sudo chsh -s /bin/zsh
+
+        echo -e "Dotfiles script is DONE!"
+        echo -e "Note: X needs to be restarted for all changes to be activated."
 
 	;;
 
