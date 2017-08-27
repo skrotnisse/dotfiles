@@ -83,6 +83,11 @@ case $1 in
         install_package feh
 	mkdir -p ~/wallpapers
 
+        # i3
+        echo -e "---- Installing rxvt-unicode.."
+        echo -e "--------------------------------------------------------------------"
+        install_package rxvt-unicode
+
         # setup symlinks
         echo -e "---- Setting up symlinks to dotfiles.."
         echo -e "--------------------------------------------------------------------"
@@ -112,9 +117,9 @@ case $1 in
 	;;
 
     *)
-	echo -e "$C_WHITEUsage: dotfiles.sh <command>$C_NONE\n"
+	echo -e "Usage: dotfiles.sh <command>\n"
 	echo -e "The commands are:"
-	echo -e "\tinstall \tInstalls applications and creates symlinks for all dotfiles."
+	echo -e "\tinstall \tInstalls applications and creates symlinks."
 	echo -e "\trefresh \tRefreshes all symlinks."
 	echo -e "\tdelete  \tDeletes all symlinks."
 	;;
