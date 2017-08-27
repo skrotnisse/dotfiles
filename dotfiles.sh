@@ -1,6 +1,9 @@
 #!/bin/bash
 
 install_package() {
+    echo -e "--------------------------------------------------------------------"
+    echo -e "---- Installing $1"
+    echo -e "--------------------------------------------------------------------"
     if hash pacman 2>/dev/null; then
 	sudo pacman -S -q $1
     elif hash apt-get 2>/dev/null; then
@@ -34,7 +37,6 @@ update_symlinks() {
     eval "(cd common && stow $STOW_ARGS i3)"
 }
 
-
 case $1 in
 
     "install")
@@ -45,65 +47,41 @@ case $1 in
         install_package git
 
 	# various applications and dependencies
-        echo -e "---- Installing curl.."
-        echo -e "--------------------------------------------------------------------"
         install_package curl
-        echo -e "---- Installing stow.."
-        echo -e "--------------------------------------------------------------------"
         install_package stow
-        echo -e "---- Installing net-tools.."
-        echo -e "--------------------------------------------------------------------"
         install_package net-tools
-        echo -e "---- Installing python-pygments.."
-        echo -e "--------------------------------------------------------------------"
         install_package python-pygments
 
 	# zsh
-        echo -e "---- Installing zsh.."
-        echo -e "--------------------------------------------------------------------"
         install_package zsh
-        echo -e "---- Installing oh-my-zsh.."
-        echo -e "--------------------------------------------------------------------"
         curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
 	# emacs
-        echo -e "---- Installing emacs.."
-        echo -e "--------------------------------------------------------------------"
         install_package emacs-nox
         install_package emacs-goodies-el
         install_package elpa-magit
 
 	# irssi
-        echo -e "---- Installing irssi.."
-        echo -e "--------------------------------------------------------------------"
 	install_package irssi
         install_package irssi-plugin-xmpp
 
         # i3
-        echo -e "---- Installing i3.."
-        echo -e "--------------------------------------------------------------------"
         install_package i3
         install_package feh
 	mkdir -p ~/wallpapers
 
         # i3
-        echo -e "---- Installing rxvt-unicode.."
-        echo -e "--------------------------------------------------------------------"
         install_package rxvt-unicode
 
         # setup symlinks
-        echo -e "---- Setting up symlinks to dotfiles.."
-        echo -e "--------------------------------------------------------------------"
 	backup_configuration
 	update_symlinks "-R"
 
         # switch to zsh
-        echo -e "---- Configuring zsh as default shell.. "
-        echo -e "--------------------------------------------------------------------"
         sudo chsh -s /bin/zsh $(whoami)
 
         echo -e "--------------------------------------------------------------------"
-        echo -e "---- Dotfiles script: COMPLETED                                  ---"
+        echo -e "---- Dotfiles: COMPLETED                                         ---"
         echo -e "--------------------------------------------------------------------"
         echo -e "---- NOTE:                                                       ---"
         echo -e "----    X needs to be restarted for all changes to be activated. ---"
