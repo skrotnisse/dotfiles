@@ -38,19 +38,18 @@ case $1 in
 	# git (should already be installed)
         install_package git
 
-	# stow
+	# various dependencies
+        install_package curl
         install_package stow
 
 	# zsh
         install_package zsh
         curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
-	# curl
-        install_package curl
-
 	# emacs
-        install_package emacs23-nox
-        install_package emacs-goodies
+        install_package emacs-nox
+        install_package emacs-goodies-el
+        install_package elpa-magit
 
 	# python pygments
         install_package python-pygments
