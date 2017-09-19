@@ -144,3 +144,6 @@ client.focused_inactive #333333 #5F676A #FFFFFF #484E50
 #client.focused          #FF2020 #902020 #FFFFFF #F49E2E
 client.focused          #20FF20 #209020 #FFFFFF #9EF42E
 #client.focused          #2020FF #202090 #FFFFFF #2E9EF4
+
+# enable random wallpapers
+exec feh --recursive --randomize --bg-center ~/wallpapers/* &
