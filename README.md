@@ -9,10 +9,6 @@ Install required packages and perform symlink synchronization:
 cd dotfiles
 ./dotfiles.sh install</code></pre>
 
-Switch to zsh:
-<pre><code>chsh -s /bin/zsh</code></pre>
-
-
 <h4>Synchronize links</h4>
 Synchronize the locally stored dotfiles to the home directory (create/remove symlinks):
 <pre><code>cd dotfiles
