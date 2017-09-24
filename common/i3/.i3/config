@@ -136,7 +136,7 @@ bar {
 	position bottom
 	workspace_buttons yes
 	tray_output none
-	font pango:DejaVu Sans Mono 12
+	font pango:DejaVu Sans Mono 10
 	colors {
 		background #101010
 		statusline #605c5a
