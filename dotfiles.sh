@@ -24,6 +24,7 @@ backup_configuration() {
     mv ~/.xinitrc ~/.dotfiles_backup 2>/dev/null
     mv ~/.Xresources ~/.dotfiles_backup 2>/dev/null
     mv ~/.i3 ~/.dotfiles_backup 2>/dev/null
+    mv ~/.i3status ~/.dotfiles_backup 2>/dev/null
 }
 
 update_symlinks() {
