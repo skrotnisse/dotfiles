@@ -132,7 +132,20 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar
 bar {
-        status_command i3status
+	mode dock
+	position bottom
+	workspace_buttons yes
+	tray_output none
+	font pango:DejaVu Sans Mono 12
+	colors {
+		background #101010
+		statusline #605c5a
+		focused_workspace #101010 #101010 #b72f62
+		active_workspace #5f5f5f #101010 #101010
+		inactive_workspace #101010 #101010 #5f5f5f
+		urgent_workspace #2e3436 #9a878f
+	}
+	status_command ~/.i3/i3bar_conky.sh
 }
 
 # client window properties:

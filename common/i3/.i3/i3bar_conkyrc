@@ -1,0 +1,33 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+update_interval 2.0
+total_run_times 0
+override_utf8_locale yes
+
+TEXT
+
+[
+#{ "full_text" : "MPD" , "color" : "\#b9d6e9" } ,
+#{ "full_text" : "${if_mpd_playing}${mpd_smart 50} ${mpd_elapsed}/${mpd_length}${else}${mpd_status}${endif}" } ,  
+ { "full_text" : "UP" , "color" : "\#b9d6e9" } ,
+ { "full_text" : "${uptime}" } ,
+ { "full_text" : "CPU" , "color" : "\#b9d6e9" } ,
+ { "full_text" : "avg: ${cpu}%" } , 
+ { "full_text" : "RAM" , "color" : "\#b9d6e9" } ,
+ { "full_text" : "${mem}" },
+ { "full_text" : "HD" , "color" : "\#b9d6e9" } ,
+ { "full_text" : "${color red}root: ${fs_free /}/${fs_size /} home: ${fs_free /home}/${fs_size /home}" } , 
+ { "full_text" : "NETWORK" , "color" : "\#b9d6e9" } ,
+ { "full_text" : "${if_up wlan0}wlan0: ${addr wlan0} @ ${wireless_essid wlan0} (${wireless_link_qual wlan0}/${wireless_link_qual_max wlan0}) ${endif}" } ,
+ { "full_text" : "${if_up eth0}eth0: ${addr eth0}${endif}" } , 
+ { "full_text" : "${if_up enp0s3}enp0s3: ${addr enp0s3}${endif}" } , 
+
+# { "full_text" : "BATTERY" , "color" : "\#b9d6e9" } ,
+# { "full_text" : "${battery BAT1}" , "color" : 
+#  ${if_match ${battery_percent BAT1}<20}"\#d97680"${else}"\#5f5f5f"${endif} } ,
+ { "full_text" : "${time %b %d %Y %I:%M%P}", "color" : "\#f0f0f0" }
+],
+

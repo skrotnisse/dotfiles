@@ -71,8 +71,9 @@ case $1 in
         install_package feh
 	mkdir -p ~/wallpapers
 
-        # i3
+        # i3 extras
         install_package rxvt-unicode
+        install_package conky-all
 
         # setup symlinks
 	backup_configuration
