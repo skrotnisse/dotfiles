@@ -25,17 +25,18 @@ backup_configuration() {
     mv ~/.Xresources ~/.dotfiles_backup 2>/dev/null
     mv ~/.i3 ~/.dotfiles_backup 2>/dev/null
     mv ~/.i3status ~/.dotfiles_backup 2>/dev/null
+    mv ~/.config/awesome ~/.dotfiles_backup 2>/dev/null
 }
 
 update_symlinks() {
-    STOW_ARGS="$1 -vt ~"
-    eval "(cd common && stow $STOW_ARGS git)"
-    eval "(cd common && stow $STOW_ARGS zsh)"
-    eval "(cd common && stow $STOW_ARGS gdb)"
-    eval "(cd common && stow $STOW_ARGS emacs)"
-    eval "(cd common && stow $STOW_ARGS irssi)"
-    eval "(cd common && stow $STOW_ARGS xorg)"
-    eval "(cd common && stow $STOW_ARGS i3)"
+    eval "(cd common && stow $1 -v -t ~ git)"
+    eval "(cd common && stow $1 -v -t ~ zsh)"
+    eval "(cd common && stow $1 -v -t ~ gdb)"
+    eval "(cd common && stow $1 -v -t ~ emacs)"
+    eval "(cd common && stow $1 -v -t ~ irssi)"
+    eval "(cd common && stow $1 -v -t ~ xorg)"
+    eval "(cd common && stow $1 -v -t ~ i3)"
+    eval "(cd common && stow $1 -v -t ~/.config awesome)"
 }
 
 case $1 in
@@ -50,6 +51,7 @@ case $1 in
 	# various applications and dependencies
         install_package curl
         install_package stow
+        install_package htop
         install_package net-tools
         install_package python-pygments
 
@@ -68,14 +70,20 @@ case $1 in
 
         # i3
         install_package i3
-        install_package feh
-	mkdir -p ~/wallpapers
 
-        # i3 extras
+        # awesome
+        install_package awesome
+        install_package awesome-extra
+
+        # wm common
+        install_package feh
+        mkdir -p ~/wallpapers
+
+        # terminal
         install_package rxvt-unicode
-        install_package conky-all
 
         # setup symlinks
+        mkdir -p ~/.config
 	backup_configuration
 	update_symlinks "-R"
 
