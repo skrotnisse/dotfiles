@@ -1,34 +1,59 @@
-; Inhibit initial splash screen
-(setq inhibit-splash-screen t)
+;; --------------------------------------
+;; Install packages
+;; --------------------------------------
+(require 'package)
 
-; Always default to text mode for new buffers
-(setq default-major-mode 'text-mode)
+(add-to-list 'package-archives
+       '("melpa" . "http://melpa.org/packages/") t)
 
-; Store backup files into separate directory
-(setq backup-directory-alist '(("." . ".emacs_saves")))
+(package-initialize)
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
-; Always backup by copying, not by renaming original
-(setq backup-by-copying t)
+(defvar myPackages
+  '(better-defaults
+    elpy))
 
-; Select color theme
+(mapc #'(lambda (package)
+    (unless (package-installed-p package)
+      (package-install package)))
+      myPackages)
+
+(package-initialize)
+
+;; --------------------------------------
+;; Configuration
+;; --------------------------------------
+(elpy-enable) ; Enable ELPY for python
+(setq inhibit-splash-screen t) ; Inhibit initial splash screen
+(menu-bar-mode -1) ; Remove menu bar
+(setq default-major-mode 'text-mode) ; Always default to text mode for new buffers
+(global-linum-mode t) ; Global linenumber mode
+(setq linum-format "%4d \u2502 ")
+
+; Backups
+(setq backup-directory-alist '(("." . ".emacs_saves"))) ; Store backup files into separate directory
+(setq backup-by-copying t) ; Always backup by copying, not by renaming original
+
+; Themes
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-arjen)
 
-; Auto indentation when writing C code
+; Indentation
 (defun set-newline-and-indent ()
   (local-set-key (kdb "RET") 'newline-and-indent))
-(add-hook 'c-mode 'set-new-line-and-indent)
+(add-hook 'c-mode 'set-new-line-and-indent) ; Auto indentation when writing C code
 
-; Setup indent levels
 (setq-default tab-width 2)
 (setq js-indent-level 2)
 (setq c-basic-offset 4)
 (setq css-indent-offset 2)
 (setq sh-basic-offset 2)
+(setq python-indent-offset 4)
 (setq-default indent-tabs-mode nil)
 
-; Default encoding of buffers
+; Default encoding
 (setq-default buffer-file-coding-system 'utf-8-unix)
 (prefer-coding-system 'utf-8-unix)
 (setq-default default-buffer-file-coding-system 'utf-8-unix)
@@ -36,3 +61,4 @@
 ; Default window size
 (add-to-list 'default-frame-alist '(width .  110)) ; characters
 (add-to-list 'default-frame-alist '(height . 60)) ; lines
+
