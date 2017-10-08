@@ -12,7 +12,9 @@
 
 (defvar myPackages
   '(better-defaults
-    elpy))
+    elpy
+    flycheck
+    py-autopep8))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -24,7 +26,6 @@
 ;; --------------------------------------
 ;; Configuration
 ;; --------------------------------------
-(elpy-enable) ; Enable ELPY for python
 (setq inhibit-splash-screen t) ; Inhibit initial splash screen
 (menu-bar-mode -1) ; Remove menu bar
 (setq default-major-mode 'text-mode) ; Always default to text mode for new buffers
@@ -50,8 +51,10 @@
 (setq c-basic-offset 4)
 (setq css-indent-offset 2)
 (setq sh-basic-offset 2)
-(setq python-indent-offset 4)
 (setq-default indent-tabs-mode nil)
+(set-variable 'py-indent-offset 4)
+(set-variable 'python-indent-guess-indent-offset nil)
+
 
 ; Default encoding
 (setq-default buffer-file-coding-system 'utf-8-unix)
@@ -62,3 +65,29 @@
 (add-to-list 'default-frame-alist '(width .  110)) ; characters
 (add-to-list 'default-frame-alist '(height . 60)) ; lines
 
+; ELPY
+(elpy-enable)
+
+; Flycheck
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+; PEP8 compliance check
+(require 'py-autopep8)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (py-autopep8 flycheck magit material-theme elpy better-defaults))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

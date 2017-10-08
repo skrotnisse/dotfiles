@@ -63,6 +63,9 @@ case $1 in
         install_package emacs-nox
         install_package emacs-goodies-el
         install_package elpa-magit
+        install_package python-jedi
+        install_package python-flake8
+        install_package python-autopep8
 
 	# irssi
 	install_package irssi
