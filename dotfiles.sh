@@ -53,6 +53,7 @@ case $1 in
         install_package stow
         install_package htop
         install_package net-tools
+        install_package python3
         install_package python-pygments
 
 	# zsh
@@ -63,9 +64,9 @@ case $1 in
         install_package emacs-nox
         install_package emacs-goodies-el
         install_package elpa-magit
-        install_package python-jedi
-        install_package python-flake8
-        install_package python-autopep8
+        install_package elpa-flycheck
+        install_package python3-jedi
+        install_package python3-flake8
 
 	# irssi
 	install_package irssi

@@ -13,8 +13,7 @@
 (defvar myPackages
   '(better-defaults
     elpy
-    flycheck
-    py-autopep8))
+    flycheck))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -67,27 +66,11 @@
 
 ; ELPY
 (elpy-enable)
+(setq elpy-rpc-python-command "python3")
+(setq python-shell-interpreter "python3")
 
 ; Flycheck
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
-; PEP8 compliance check
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (py-autopep8 flycheck magit material-theme elpy better-defaults))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
