@@ -51,9 +51,8 @@ case $1 in
 	# various applications and dependencies
         install_package curl
         install_package stow
-        install_package htop
+        install_package glances
         install_package net-tools
-        install_package python3
         install_package python-pygments
 
 	# zsh
