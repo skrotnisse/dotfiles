@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="ys"
+ZSH_THEME="bira"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -81,10 +81,11 @@ export PATH=${PATH}:/usr/local/bin
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias l="ls -lrt"
-alias ll="ls -lart"
-alias lf="ls -lartF"
+alias l="ls -lr"
+alias ll="ls -la"
 
 alias pcat='pygmentize -g -O style=colorful,linenos=1'
 
 alias pacman="pacman --color always"
+
+LS_COLORS="di=01;37"
